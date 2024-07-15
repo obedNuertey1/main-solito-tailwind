@@ -71,7 +71,7 @@ web-build/
 
 .turbo
 build/**
-
+security.txt
 
 .pnp.*
 .yarn/*
@@ -80,3 +80,5 @@ build/**
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+public-key.asc
+secret-key.asc

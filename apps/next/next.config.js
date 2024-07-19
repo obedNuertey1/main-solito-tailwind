@@ -1,4 +1,19 @@
-const { withExpo } = require('@expo/next-adapter')
+const { withExpo } = require('@expo/next-adapter');
+const withPlugins = require('next-compose-plugins');
+
+const withTM = require('next-transpile-modules')([
+  'react-native',
+  'react-native-web',
+  'solito',
+  'moti',
+  'app',
+  'react-native-reanimated',
+  'nativewind',
+  'react-native-gesture-handler'
+])
+
+
+
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -8,16 +23,19 @@ const nextConfig = {
   // https://github.com/nandorojo/moti/issues/224
   // once that gets fixed, set this back to true
   reactStrictMode: false,
-  transpilePackages: [
-    'react-native',
-    'react-native-web',
-    'solito',
-    'moti',
-    'app',
-    'react-native-reanimated',
-    'nativewind',
-    'react-native-gesture-handler',
-  ],
+  // transpilePackages: [
+  //   'react-native',
+  //   'react-native-web',
+  //   'solito',
+  //   'moti',
+  //   'app',
+  //   'react-native-reanimated',
+  //   'nativewind',
+  //   'react-native-gesture-handler',
+  // ],
+  env: {}
 }
 
-module.exports = withExpo(nextConfig)
+module.exports = withPlugins([withTM, [withExpo, {projectRoot: __dirname}]], 
+  nextConfig
+)

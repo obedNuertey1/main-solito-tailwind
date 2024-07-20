@@ -15,8 +15,8 @@
     "typescript": "^5.2.2"
   },
   "scripts": {
-    "native": "cd apps/expo && yarn start",
-    "web": "cd apps/next && yarn next"
+    "native": "cd apps/expo && APP_ENV=local node ../../generateEnv.js && yarn start",
+    "web": "cd apps/next && APP_ENV=local node ../../generateEnv.js && yarn next"
   },
   "resolutions": {
     "metro": "~0.76.7",
@@ -26,5 +26,8 @@
     "**/expo-router",
     "**/expo-router/**"
   ],
-  "packageManager": "yarn@3.4.1"
+  "packageManager": "yarn@3.4.1",
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  }
 }

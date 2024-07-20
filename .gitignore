@@ -82,3 +82,4 @@ security.txt
 !.yarn/versions
 public-key.asc
 secret-key.asc
+.env.global

@@ -3,11 +3,14 @@ import { Row } from 'app/design/layout'
 import { View } from 'app/design/view'
 
 import { MotiLink } from 'solito/moti'
+import { Platform } from 'react-native'
+import {API_URL, API_KEY} from 'app/env'
+
 
 export function HomeScreen() {
   return (
     <View className="flex-1 items-center justify-center p-3">
-      <H1>Welcome to Solito.</H1>
+      <H1>Welcome to Solito. API_URL={API_URL} API_KEY={API_KEY}</H1>
       <View className="max-w-xl">
         <P className="text-center">
           Here is a basic starter to show you how you can navigate from one

@@ -1,12 +1,14 @@
 import { Platform } from "react-native";
 
 // ############# Please do not change code below this line ##############
-const API_URL = (Platform.OS !== 'web')?process.env.EXPO_API_URL:process.env.NEXT_PUBLIC_API_URL;
-const API_KEY = (Platform.OS !== 'web')?process.env.EXPO_API_KEY:process.env.NEXT_PUBLIC_API_KEY;
-const JELLO_API = (Platform.OS !== 'web')?process.env.EXPO_JELLO_API:process.env.NEXT_PUBLIC_JELLO_API;
+const X_RAPIDAPI_KEY = (Platform.OS !== 'web')?process.env.EXPO_X_RAPIDAPI_KEY:process.env.NEXT_PUBLIC_X_RAPIDAPI_KEY;
+const X_RAPIDAPI_HOST = (Platform.OS !== 'web')?process.env.EXPO_X_RAPIDAPI_HOST:process.env.NEXT_PUBLIC_X_RAPIDAPI_HOST;
+const RANDOM_IMAGE_HOSTNAME = (Platform.OS !== 'web')?process.env.EXPO_RANDOM_IMAGE_HOSTNAME:process.env.NEXT_PUBLIC_RANDOM_IMAGE_HOSTNAME;
+const ACTUAL_RANDOM_IMAGE_HOSTNAME = (Platform.OS !== 'web')?process.env.EXPO_ACTUAL_RANDOM_IMAGE_HOSTNAME:process.env.NEXT_PUBLIC_ACTUAL_RANDOM_IMAGE_HOSTNAME;
 
 export {
-	API_URL,
-	API_KEY,
-	JELLO_API,
+	X_RAPIDAPI_KEY,
+	X_RAPIDAPI_HOST,
+	RANDOM_IMAGE_HOSTNAME,
+	ACTUAL_RANDOM_IMAGE_HOSTNAME,
 };

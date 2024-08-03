@@ -33,7 +33,15 @@ const nextConfig = {
   //   'nativewind',
   //   'react-native-gesture-handler',
   // ],
-  env: {}
+  env: {},
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: "fastly.picsum.photos"
+      }
+    ]
+  }
 }
 
 module.exports = withPlugins([withTM, [withExpo, {projectRoot: __dirname}]], 

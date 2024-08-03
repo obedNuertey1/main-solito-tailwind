@@ -1,16 +1,42 @@
 import { A, H1, P, Text, TextLink } from 'app/design/typography'
 import { Row } from 'app/design/layout'
 import { View } from 'app/design/view'
-
+import Animate from 'react-native-reanimated'
+// import { Image } from 'react-native'
+// import { Image } from 'react-native'
+import { Image } from 'moti'
 import { MotiLink } from 'solito/moti'
 import { Platform } from 'react-native'
-import {API_URL, API_KEY} from 'app/env'
+import {X_RAPIDAPI_KEY, X_RAPIDAPI_HOST, ACTUAL_RANDOM_IMAGE_HOSTNAME} from 'app/env';
+import useFetch from 'app/hooks/useFetch';
+import { styled, StyledComponent } from 'nativewind';
+import { ImageBackground } from 'react-native'
 
+// const Image = styled(CustomImage, 'image');
 
 export function HomeScreen() {
+  const obj:fetchParams= {
+    endpoint: "common",
+    query: {
+      imageDimensions: {
+        height: 500,
+        width: 500
+      }
+    }
+  }
+  const [joke, jokeImage] = useFetch(obj).data;
   return (
     <View className="flex-1 items-center justify-center p-3">
-      <H1>Welcome to Solito. API_URL={API_URL} API_KEY={API_KEY}</H1>
+      <H1>Welcome to Solito. X_RAPIDAPI_KEY={X_RAPIDAPI_KEY}</H1>
+      {/* <Image source={{
+        uri: `${jokeImage}`
+      }} width={500} height={500} alt='some image'/> */}
+      <Image source={{uri: jokeImage, width: 500, height: 500}} alt='image' />
+      {/* <ImageBackground className='justify-center items-center' source={{uri: jokeImage}} width={500} height={500}>
+        <View className='text-center w-[500px] h-[500px] flex items-center justify-center'>
+          <H1 className='text-yellow-600' style={{textShadowRadius:6, textShadowColor: "#000000"}}>Hello World</H1>
+        </View>
+      </ImageBackground> */}
       <View className="max-w-xl">
         <P className="text-center">
           Here is a basic starter to show you how you can navigate from one

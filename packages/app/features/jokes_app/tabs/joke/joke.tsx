@@ -73,7 +73,7 @@ const Joke = () => {
           headerLeft() {
             return (
               <TouchableOpacity onPress={()=>{
-                router.back();
+                router.replace("/");
               }} className='bg-black opacity-50 rounded-[10px] p-1' >
                 <View className='bg-black p-1.5 rounded-[10px]'>
                   <Feather name="arrow-left" size={20} color={"#fdfcdc"} />

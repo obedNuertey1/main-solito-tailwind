@@ -12,7 +12,6 @@ const useTiming = (ms: number)=>{
 
     const clearTimer = useCallback(()=>{
         if(timeoutRef.current){
-            console.log(timeoutRef.current);
             clearTimeout(timeoutRef.current);
             timeoutRef.current = null;
         }

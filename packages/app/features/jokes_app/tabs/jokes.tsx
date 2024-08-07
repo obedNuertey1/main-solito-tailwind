@@ -1,15 +1,38 @@
-import { View, Text, TouchableOpacity, ImageBackground } from 'react-native'
-// import React from 'react'
+import { View } from 'react-native'
 import {Stack} from 'expo-router';
-import {useRouter} from 'solito/router';
 import { Image } from 'moti';
 import { StyledComponent } from 'nativewind';
-import useTiming from 'app/hooks/useTiming';
-import Animated, {SlideInLeft, Easing} from 'react-native-reanimated'
+import Animated, {useSharedValue, useAnimatedStyle, withSpring, withDelay} from 'react-native-reanimated';
+import {useCallback} from 'react';
+import {useFocusEffect} from '@react-navigation/native';
+import JokeButtons from 'app/components/JokeButtons/JokeButtons';
+import JokeHeaderImage from 'app/components/JokeHeaderImage/JokeHeaderImage';
 
-const Jokes = () => {
-    const router = useRouter();
-    const [startTimer, clearTimer] = useTiming(500);
+export default function Jokes(){
+    const jokeImageSharedVal = useSharedValue(1);
+    const jokeImageOpacity = useSharedValue(0);
+    
+
+    const jokeImageSharedValStyle = useAnimatedStyle(()=>({
+        transform: [{scale: jokeImageSharedVal.value}],
+        opacity: jokeImageOpacity.value
+    }))
+
+
+    useFocusEffect(
+        useCallback(()=>{
+            jokeImageOpacity.value = 0;
+            jokeImageSharedVal.value = 1;
+    
+            jokeImageSharedVal.value = withDelay(700*3, withSpring(0.4, {
+                duration: 500
+            }))
+            jokeImageOpacity.value = withDelay(700*3, withSpring(1, {
+                duration: 500
+            }))
+            return ()=>{}
+        },[])
+    )
 
   return (
     <>
@@ -23,53 +46,9 @@ const Jokes = () => {
         }}
         />
         <View className='flex-[1] bg-gray-800'>
-            <View className='object-cover w-screen mt-[20%]'>
-                <StyledComponent component={Image} source={require('../../../assets/images/jokes-header-image.png')} className='w-screen scale-[0.4] -mt-6 -mb-14' />
-            </View>
-            <View className="flex-[1] flex-col justify-center items-center px-[40px] gap-4">
-                <TouchableOpacity onPress={async()=>{
-                    await startTimer();
-                    router.push('/joke/doctor');
-                    clearTimer();
-                }}>
-                    <View className='border-[10px] rounded-[10px] w-60 h-24 border-[#0081a7] flex items-center justify-center bg-primary'>
-                        <View className='rounded-[10px] w-[224px] h-20 bg-secondary-lighter flex items-center justify-center'>
-                            <StyledComponent component={ImageBackground} source={require('../../../assets/images/doctorImage.png')} className='w-[100%] h-[100%] scale-75'></StyledComponent>
-                        </View>
-                    </View>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={
-                    async()=>{
-                        await startTimer();
-                        router.push('/joke/engineer');
-                        clearTimer();
-                    }
-                }>
-                    <View className='border-[10px] rounded-[10px] w-60 h-24 p-3 border-[#0081a7] flex items-center justify-center bg-primary'>
-                        <View className='rounded-[10px] w-[224px] h-20 bg-secondary-lighter flex items-center justify-center'>
-                            <StyledComponent component={ImageBackground} source={require('../../../assets/images/engineerImage.png')} className='w-[100%] h-[100%] scale-75 flex justify-center items-center'>
-                            <Text className='text-amber-400 text-5xl shadow-sm font-extrabold bg-secondary-lighter rounded-[10px]'>Engineer</Text>
-                            </StyledComponent>
-                        </View>
-                    </View>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={
-                    async()=>{
-                        await startTimer();
-                        router.push('/joke/common');
-                        clearTimer();
-                    }
-                }>
-                    <View className='border-[10px] rounded-[10px] w-60 h-24 p-3 border-[#0081a7] flex items-center justify-center bg-primary'>
-                        <View className='rounded-[10px] w-[224px] h-20 bg-secondary-lighter flex items-center justify-center'>
-                            <StyledComponent component={ImageBackground} source={require('../../../assets/images/common.png')} className='w-[100%] h-[100%] scale-75 flex justify-center items-center'><Text className='text-amber-400 text-5xl shadow-sm font-extrabold bg-secondary-lighter rounded-[10px]'>Common</Text></StyledComponent>
-                        </View>
-                    </View>
-                </TouchableOpacity>
-            </View>
+            <JokeHeaderImage jokeImageSharedValStyle={jokeImageSharedValStyle} />
+            <JokeButtons jokeImageOpacity={jokeImageOpacity} jokeImageSharedVal={jokeImageSharedVal} />
         </View>
     </>
   )
 }
-
-export default Jokes;

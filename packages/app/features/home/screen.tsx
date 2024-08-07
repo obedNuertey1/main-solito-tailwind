@@ -27,7 +27,7 @@ export function HomeScreen() {
   const [joke, jokeImage] = useFetch(obj).data;
   return (
     <View className="flex-1 items-center justify-center p-3">
-      <H1>Welcome to Solito. X_RAPIDAPI_KEY={X_RAPIDAPI_KEY}</H1>
+      <H1>Welcome to Solito.</H1>
       {/* <Image source={{
         uri: `${jokeImage}`
       }} width={500} height={500} alt='some image'/> */}
